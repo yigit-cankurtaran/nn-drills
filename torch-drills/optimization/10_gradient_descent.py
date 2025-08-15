@@ -1,0 +1,80 @@
+"""
+DRILL 10: Manual Gradient Descent Implementation
+
+TASK: Implement gradient descent from scratch:
+
+1. Create a simple quadratic function f(x) = (x - 3)^2 + 5
+2. Implement manual gradient descent to find the minimum
+3. Compare with automatic differentiation results
+4. Implement SGD, Adam optimizer basics
+5. Plot the optimization trajectory
+
+EXPECTED OUTPUT:
+- Manual gradient descent finds minimum at x=3
+- Convergence to the correct minimum value
+- Comparison with PyTorch's automatic differentiation
+"""
+
+import torch
+import matplotlib.pyplot as plt
+
+def quadratic_function(x):
+    """f(x) = (x - 3)^2 + 5"""
+    return (x - 3)**2 + 5
+
+def quadratic_gradient(x):
+    """df/dx = 2(x - 3)"""
+    # YOUR CODE HERE
+    pass
+
+def manual_gradient_descent(start_x, learning_rate, num_steps):
+    """
+    Implement gradient descent manually
+    Returns: history of x values and function values
+    """
+    x_history = []
+    f_history = []
+    
+    x = start_x
+    for step in range(num_steps):
+        # YOUR CODE HERE
+        pass
+    
+    return x_history, f_history
+
+def torch_gradient_descent(start_x, learning_rate, num_steps):
+    """
+    Use PyTorch's automatic differentiation
+    """
+    x = torch.tensor([start_x], requires_grad=True)
+    optimizer = torch.optim.SGD([x], lr=learning_rate)
+    
+    x_history = []
+    f_history = []
+    
+    for step in range(num_steps):
+        # YOUR CODE HERE
+        pass
+    
+    return x_history, f_history
+
+def solve():
+    start_x = 0.0
+    learning_rate = 0.1
+    num_steps = 50
+    
+    # Manual gradient descent
+    manual_x_hist, manual_f_hist = manual_gradient_descent(start_x, learning_rate, num_steps)
+    
+    # PyTorch gradient descent
+    torch_x_hist, torch_f_hist = torch_gradient_descent(start_x, learning_rate, num_steps)
+    
+    print(f"Manual GD final x: {manual_x_hist[-1]:.6f}")
+    print(f"Torch GD final x:  {torch_x_hist[-1]:.6f}")
+    print(f"Target x: 3.0")
+    print(f"Manual GD final f(x): {manual_f_hist[-1]:.6f}")
+    print(f"Torch GD final f(x):  {torch_f_hist[-1]:.6f}")
+    print(f"Target f(x): 5.0")
+
+if __name__ == "__main__":
+    solve()
