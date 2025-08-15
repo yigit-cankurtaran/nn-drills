@@ -25,6 +25,26 @@ import torch
 
 def solve():
     # YOUR CODE HERE
+    zeros_tensor = torch.zeros(3, 3) # 1 done
+    ones_tensor = torch.ones(2, 4) # 2 done
+    print(zeros_tensor)
+    print(ones_tensor)
+    sequence_tensor = torch.tensor([1.,2.,3.,4.,5.]) # 3 done
+    print(sequence_tensor)
+    print(sequence_tensor.shape)
+    random_tensor = torch.rand(size=[2,3]) # 4 done
+    print(random_tensor)
+    print(random_tensor.shape)
+    identity_tensor = torch.eye(3, 3) # 5 done
+    print(identity_tensor)
+    print(identity_tensor.shape)
+    added_tensor = torch.add(zeros_tensor, identity_tensor) # 6 done
+    print(added_tensor)
+    print(added_tensor.shape)
+    multiplied_tensor = torch.mul(ones_tensor, 5) # 7 done
+    print(multiplied_tensor)
+    print(multiplied_tensor.shape)
+
     pass
 
 if __name__ == "__main__":
