@@ -34,6 +34,26 @@ def solve():
     print(tensor)
     
     # YOUR CODE HERE
+    element = tensor[2,1] #confused, do i use 1,0 or 2,1
+    print(element)
+    print(element.shape)
+    second_row = tensor[1]
+    print(second_row)
+    print(second_row.shape)
+    last_column = tensor[:, -1] # all rows, last column only
+    print(last_column)
+    print(last_column.shape)
+    submatrix = tensor[:2, :2]
+    print(submatrix)
+    print(submatrix.shape)
+    every_other = tensor[0, ::2]
+    print(every_other)
+    print(every_other.shape)
+    modified_tensor = tensor.clone()
+    modified_tensor[:, 2] = 99
+    print(modified_tensor)
+    print(modified_tensor.shape)
+    
     pass
 
 if __name__ == "__main__":
