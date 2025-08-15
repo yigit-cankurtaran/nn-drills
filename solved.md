@@ -15,8 +15,8 @@ Test your fundamental understanding of PyTorch tensors and operations.
 
 | Drill | Name | Completed | Grade | Notes |
 |-------|------|-----------|-------|-------|
-| 01 | `tensor_creation.py` | ⭕ Not Started | - | Create tensors, basic operations |
-| 02 | `tensor_indexing.py` | ⭕ Not Started | - | Indexing, slicing, extraction |
+| 01 | `tensor_creation.py` | ✅ Completed | B+ (87%) | Create tensors, basic operations - Good implementation, remove debug prints |
+| 02 | `tensor_indexing.py` | ✅ Completed | A- (91%) | Indexing, slicing, extraction - Excellent understanding, clean up debug code |
 | 03 | `tensor_reshaping.py` | ⭕ Not Started | - | Reshape, transpose, dimension manipulation |
 | 04 | `tensor_math.py` | ⭕ Not Started | - | Mathematical operations, broadcasting |
 
@@ -60,10 +60,10 @@ Complete partially implemented advanced concepts.
 
 ## Progress Summary
 - **Total Drills**: 18
-- **Completed**: 0
+- **Completed**: 2
 - **In Progress**: 0
-- **Not Started**: 18
-- **Overall Progress**: 0%
+- **Not Started**: 16
+- **Overall Progress**: 11%
 
 ## Grading Scale
 - **A+** (95-100%): Excellent implementation, optimal efficiency, great code style
