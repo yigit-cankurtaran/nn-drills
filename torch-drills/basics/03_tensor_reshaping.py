@@ -32,7 +32,14 @@ def solve():
     print("Shape:", tensor_1d.shape)
     
     # YOUR CODE HERE
-    pass
+    tensor_copy = torch.clone(tensor_1d) # ensuring og tensor stays the same
+    tensor_3x4 = torch.reshape(tensor_copy, [3,4])
+    tensor_2x6 = torch.reshape(tensor_copy, [2,6])
+    tensor_4x3 = torch.reshape(tensor_copy, [4,3])
+    unsqueezed = torch.unsqueeze(tensor_copy, 0)
+    squeezed = torch.squeeze(unsqueezed)
+    transposed = tensor_3x4.T
+    flattened = torch.flatten(tensor_2x6) # tensor_copy anyway
 
 if __name__ == "__main__":
     solve()

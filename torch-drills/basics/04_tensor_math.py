@@ -43,6 +43,8 @@ def solve():
     
     # YOUR CODE HERE
     # Implement all the required operations
+    d = torch.add(a, 5)
+    print(d)
     pass
 
 if __name__ == "__main__":
