@@ -43,8 +43,33 @@ def solve():
     
     # YOUR CODE HERE
     # Implement all the required operations
-    d = torch.add(a, 5)
-    print(d)
+
+    # element-wise 4 operations
+    addeda = torch.add(a, 5)
+    subtracteda = torch.sub(addeda, 5)
+    multiplieda = torch.mul(subtracteda, 3)
+    divideda = torch.div(multiplieda, 3)
+
+    # question 2
+    matmulbc = torch.mm(b, c) # picked b@c b is 2x3 and c is 3x2
+
+    # question 3
+    meanb = torch.mean(b)
+    sumb = torch.sum(b)
+    maxb = torch.max(b)
+    minb = torch.min(b)
+
+    # question 4
+    sinc = torch.sin(c)
+    cosc = torch.cos(c)
+    expc = torch.exp(c)
+    logc = torch.log(c) #natural logarithm
+
+    
+    # question 5
+    to_add = torch.asarray([1.,2.,3.]) # needs to be length 3 bc a has 3 cols
+    tensoradd = torch.add(a, to_add)
+    
     pass
 
 if __name__ == "__main__":

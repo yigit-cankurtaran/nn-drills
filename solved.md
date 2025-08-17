@@ -18,7 +18,7 @@ Test your fundamental understanding of PyTorch tensors and operations.
 | 01 | `tensor_creation.py` | ✅ Completed | B+ (87%) | Create tensors, basic operations - Good implementation, remove debug prints |
 | 02 | `tensor_indexing.py` | ✅ Completed | A- (91%) | Indexing, slicing, extraction - Excellent understanding, clean up debug code |
 | 03 | `tensor_reshaping.py` | ✅ Completed | B+ (87%) | Reshape, transpose, dimension manipulation - Clean implementation, good defensive programming |
-| 04 | `tensor_math.py` | ⭕ Not Started | - | Mathematical operations, broadcasting |
+| 04 | `tensor_math.py` | ✅ Completed | A- (92%) | Mathematical operations, broadcasting - Good understanding of tensor ops, clean broadcasting |
 
 ### 🧠 Neural Networks (4 drills)
 Build neural network components from scratch and understand their inner workings.
@@ -60,10 +60,10 @@ Complete partially implemented advanced concepts.
 
 ## Progress Summary
 - **Total Drills**: 18
-- **Completed**: 3
+- **Completed**: 4
 - **In Progress**: 0
-- **Not Started**: 15
-- **Overall Progress**: 17%
+- **Not Started**: 14
+- **Overall Progress**: 22%
 
 ## Grading Scale
 - **A+** (95-100%): Excellent implementation, optimal efficiency, great code style
