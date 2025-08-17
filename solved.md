@@ -25,7 +25,7 @@ Build neural network components from scratch and understand their inner workings
 
 | Drill | Name | Completed | Grade | Notes |
 |-------|------|-----------|-------|-------|
-| 05 | `linear_layer.py` | ⭕ Not Started | - | Implement linear layer from scratch |
+| 05 | `linear_layer.py` | ✅ Completed | A (93%) | Implement linear layer from scratch - Excellent implementation with proper Xavier initialization |
 | 06 | `activation_functions.py` | ⭕ Not Started | - | Implement common activation functions |
 | 07 | `simple_mlp.py` | ⭕ Not Started | - | Build MLP for XOR problem |
 | 08 | `conv_layer.py` | ⭕ Not Started | - | Understanding convolutional layers |
@@ -60,10 +60,10 @@ Complete partially implemented advanced concepts.
 
 ## Progress Summary
 - **Total Drills**: 18
-- **Completed**: 4
+- **Completed**: 5
 - **In Progress**: 0
-- **Not Started**: 14
-- **Overall Progress**: 22%
+- **Not Started**: 13
+- **Overall Progress**: 28%
 
 ## Grading Scale
 - **A+** (95-100%): Excellent implementation, optimal efficiency, great code style

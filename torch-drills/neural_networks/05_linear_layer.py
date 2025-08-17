@@ -23,11 +23,15 @@ import math
 class LinearLayer:
     def __init__(self, in_features, out_features):
         # YOUR CODE HERE
-        pass
+
+        self.bias = torch.zeros(out_features,)
+        self.weight = torch.zeros(out_features, in_features) # weights are this way bc backwards comp
+        nn.init.xavier_normal_(self.weight)
     
     def forward(self, x):
         # YOUR CODE HERE
-        pass
+        self.output = torch.matmul(x, self.weight.T) + self.bias
+        return self.output
 
 def solve():
     # Test your implementation
