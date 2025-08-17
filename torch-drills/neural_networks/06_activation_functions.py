@@ -36,7 +36,7 @@ def custom_tanh(x):
 
 def custom_leaky_relu(x, negative_slope=0.01):
     # YOUR CODE HERE
-    return torch.where(x>0, x, negative_slope*x)
+    return torch.maximum(x, negative_slope*x)
 
 def custom_swish(x):
     # YOUR CODE HERE
