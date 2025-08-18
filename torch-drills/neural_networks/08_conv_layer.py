@@ -37,17 +37,23 @@ def solve():
           [0, 0, 1, 1, 1]]]
     ], dtype=torch.float32)
     
-    print("Input tensor shape:", input_tensor.shape)
+    print("Input tensor shape:", input_tensor.shape) #[1,1,5,5]
     print("Input tensor:")
-    print(input_tensor.squeeze())
+    print(input_tensor.squeeze()) #prints with shape [1,5,5]
     
     # YOUR CODE HERE:
     # 1. Create different conv layers with various parameters
     # 2. Apply them to the input
     # 3. Calculate expected output sizes
     # 4. Compare with actual output sizes
+
+    clone_tensor = torch.clone(input_tensor) #4d tensor
+
+    conv1 = nn.Conv2d(in_channels=1,out_channels=1,kernel_size=3, padding=1)
+    clone_tensor = conv1(clone_tensor)
+    print(clone_tensor)
+
     
-    pass
 
 if __name__ == "__main__":
     solve()
