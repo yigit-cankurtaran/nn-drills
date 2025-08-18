@@ -24,8 +24,8 @@ def calculate_conv_output_size(input_size, kernel_size, padding=0, stride=1):
     Formula: (input_size + 2*padding - kernel_size) / stride + 1
     """
     # YOUR CODE HERE
-    pass
-
+    return (input_size + 2*padding - kernel_size) / stride + 1
+    
 def solve():
     # Create a simple 5x5 input (like a tiny image)
     # Add batch and channel dimensions: (batch_size=1, channels=1, height=5, width=5)

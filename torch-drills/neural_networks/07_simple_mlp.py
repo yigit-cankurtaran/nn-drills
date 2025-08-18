@@ -19,6 +19,16 @@ EXPECTED OUTPUT:
 import torch
 import torch.nn as nn
 
+def device():
+    dev = torch.device("cpu")
+    if torch.cuda.is_available():
+        dev = torch.device("cuda")
+    elif torch.mps.is_available():
+        dev = torch.device("mps")
+
+    print(f"device is {dev}")
+    return dev
+
 class SimpleMLP(nn.Module):
     def __init__(self, input_size, hidden_sizes, output_size):
         """
@@ -29,16 +39,37 @@ class SimpleMLP(nn.Module):
         """
         super(SimpleMLP, self).__init__()
         # YOUR CODE HERE
-        pass
+        self.model = nn.Sequential(
+            #input
+            nn.Linear(input_size, hidden_sizes[0]),
+            nn.ReLU(),
+            # hidden layers
+            nn.Linear(hidden_sizes[0], hidden_sizes[1]),
+            nn.ReLU(),
+            nn.Linear(hidden_sizes[1], hidden_sizes[1]),
+            nn.ReLU(),
+            nn.Linear(hidden_sizes[1], output_size),
+            nn.Sigmoid()
+        ).to(device())
     
     def forward(self, x):
         # YOUR CODE HERE
-        pass
+        self.output = self.model(x)
+        return self.output
 
 def create_xor_dataset():
     """Create XOR dataset for testing"""
-    # YOUR CODE HERE
-    pass
+    xor_vals = [[0.,0.],
+                [0.,1.],
+                [1.,0.],
+                [1.,1.]]
+    xor_ans = [[0],
+            [1],
+            [1],
+            [0]]
+    xor_vals = torch.tensor(xor_vals).to(device())
+    xor_ans = torch.tensor(xor_ans).to(device())
+    return xor_vals, xor_ans
 
 def solve():
     # Create XOR dataset
