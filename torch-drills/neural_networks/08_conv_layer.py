@@ -48,12 +48,23 @@ def solve():
     # 4. Compare with actual output sizes
 
     clone_tensor = torch.clone(input_tensor) #4d tensor
+    # the shape is [1,1,5,5] bc those are batch and channel dimensions, we need it
 
-    conv1 = nn.Conv2d(in_channels=1,out_channels=1,kernel_size=3, padding=1)
-    clone_tensor = conv1(clone_tensor)
-    print(clone_tensor)
+    kernel_size = 3
 
-    
+    conv = nn.Conv2d(in_channels=1,out_channels=1,kernel_size=kernel_size)
+    clone_tensor = conv(clone_tensor)
+    print(f"clone tensor is {clone_tensor} its shape is {clone_tensor.shape}")
+    print(f"our size is {calculate_conv_output_size(input_size=clone_tensor.size(2),kernel_size=kernel_size)}")
+
+    conv_with_stride = nn.Conv2d(in_channels=1,out_channels=1,kernel_size=kernel_size,stride=2)
+    clone_tensor = conv_with_stride(clone_tensor)
+    print(f"clone_tensor after stride is {clone_tensor} its shape is {clone_tensor.shape}")
+    print(f"our size is {calculate_conv_output_size(clone_tensor.size(2),kernel_size)}")
+
+    conv_with_padding = nn.Conv2d(in_channels=1, out_channels=1, kernel_size=kernel_size, padding=2)
+    clone_tensor = conv_with_padding(clone_tensor)
+    print(f"clone_tensor after padding is {clone_tensor} its shape is {clone_tensor.shape}")
 
 if __name__ == "__main__":
     solve()
