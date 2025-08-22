@@ -21,7 +21,15 @@ import torch.nn.functional as F
 def custom_mse_loss(predictions, targets):
     """Mean Squared Error Loss"""
     # YOUR CODE HERE
-    pass
+    # square of the differences
+    sum = 0
+    n = 0
+    for p,t in zip(predictions, targets):
+        sum += (t - p) ** 2
+        n += 1
+
+    return sum / n
+        
 
 def custom_binary_cross_entropy(predictions, targets):
     """Binary Cross Entropy Loss (with logits)"""
@@ -52,12 +60,12 @@ def solve():
     # Test Binary Cross Entropy
     print("=== Testing Binary Cross Entropy ===")
     # YOUR CODE HERE: Create test data and compare implementations
-    torch_bce = F.binary_cross_entropy()
+    # torch_bce = F.binary_cross_entropy()
     
     # Test Cross Entropy
     print("=== Testing Cross Entropy ===")
     # YOUR CODE HERE: Create test data and compare implementations
-    torch_ce = F.cross_entropy()
+    # torch_ce = F.cross_entropy()
     
     pass
 
