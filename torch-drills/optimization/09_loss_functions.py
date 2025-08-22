@@ -52,10 +52,12 @@ def solve():
     # Test Binary Cross Entropy
     print("=== Testing Binary Cross Entropy ===")
     # YOUR CODE HERE: Create test data and compare implementations
+    torch_bce = F.binary_cross_entropy()
     
     # Test Cross Entropy
     print("=== Testing Cross Entropy ===")
     # YOUR CODE HERE: Create test data and compare implementations
+    torch_ce = F.cross_entropy()
     
     pass
 
