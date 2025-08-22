@@ -17,6 +17,8 @@ EXPECTED OUTPUT:
 
 import torch
 import torch.nn as nn
+import matplotlib
+import matplotlib.pyplot as plt
 
 def calculate_conv_output_size(input_size, kernel_size, padding=0, stride=1):
     """
@@ -83,5 +85,40 @@ def solve():
     if (padding_and_stride_output == padding_and_stride_tensor.shape[2]):
         print("padding_and_stride results match")
 
+    # og visualization
+    plt.figure(figsize=(12, 3))
+    plt.subplot(1, 4, 1)
+    plt.imshow(input_tensor.squeeze().numpy(), cmap='gray')
+    plt.title('Original Input')
+    plt.colorbar()
+
+    # conv
+    plt.subplot(1,4,2)
+    plt.imshow(conv_tensor.squeeze().detach().numpy(), cmap='gray')
+    plt.title(f"conv (k={kernel_size})")
+    plt.colorbar()
+
+    # stride
+    plt.subplot(1,4,3)
+    plt.imshow(stride_tensor.squeeze().detach().numpy(), cmap='gray')
+    plt.title(f"stride (k={kernel_size})")
+    plt.colorbar()
+
+    # padding
+    plt.subplot(1,4,4)
+    plt.imshow(padding_tensor.squeeze().detach().numpy(), cmap='gray')
+    plt.title(f"padding (k={kernel_size})")
+    plt.colorbar()
+
+    # what conv learned
+    kernel = conv.weight.squeeze().detach().numpy()
+    plt.figure(figsize=(4,4))
+    plt.imshow(kernel, cmap="RdBu")
+    plt.title("convolution kernel")
+    plt.colorbar()
+
+    plt.show()
+
 if __name__ == "__main__":
     solve()
+
