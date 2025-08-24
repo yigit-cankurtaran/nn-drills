@@ -35,7 +35,16 @@ def custom_binary_cross_entropy(predictions, targets):
     """Binary Cross Entropy Loss (with logits)"""
     # YOUR CODE HERE
     # Hint: Use torch.clamp to avoid log(0)
-    pass
+    n = len(predictions)
+    sum = 0
+    for p,t in zip(predictions,targets):
+        p = torch.clamp(p, 1e-7, 1-1e-7)
+
+        intermediate1 = t * torch.log(p)
+        intermediate2 = (1-t) * torch.log(1-p)
+        sum += intermediate1 + intermediate2
+
+    return -sum/n
 
 def custom_cross_entropy(logits, targets):
     """Cross Entropy Loss"""
@@ -60,7 +69,16 @@ def solve():
     # Test Binary Cross Entropy
     print("=== Testing Binary Cross Entropy ===")
     # YOUR CODE HERE: Create test data and compare implementations
-    # torch_bce = F.binary_cross_entropy()
+    pred_binary = torch.tensor([0.8, 0.3, 0.9])
+    target_binary = torch.tensor([1.0, 0.0, 1.0])
+
+    custom_bce = custom_binary_cross_entropy(pred_binary, target_binary)
+    torch_bce = F.binary_cross_entropy(pred_binary, target_binary)
+    
+    print(f"Custom BCE: {custom_bce:.6f}")
+    print(f"Torch BCE:  {torch_bce:.6f}")
+    print(f"Close: {torch.allclose(custom_bce, torch_bce)}")
+    print()
     
     # Test Cross Entropy
     print("=== Testing Cross Entropy ===")
