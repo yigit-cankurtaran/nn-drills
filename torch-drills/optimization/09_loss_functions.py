@@ -48,7 +48,15 @@ def custom_cross_entropy(logits, targets):
     """Cross Entropy Loss"""
     # YOUR CODE HERE
     # Hint: Use log_softmax and gather operations
-    pass
+    probabilities = torch.log_softmax(logits, dim=-1)
+
+    batch_size = logits.shape[0] # returns 3, gets number of samples in batch
+    targets_reshaped = targets.view(batch_size,1) # reshape to 3,1 for gather
+
+    # select log prob at the index specified by target
+    selected_probs = probabilities.gather(1, targets_reshaped).squeeze(1)
+
+    return -selected_probs.mean()
 
 def solve():
     # Test MSE Loss
@@ -81,9 +89,18 @@ def solve():
     # Test Cross Entropy
     print("=== Testing Cross Entropy ===")
     # YOUR CODE HERE: Create test data and compare implementations
-    # torch_ce = F.cross_entropy()
-    
-    pass
+    matrix_bin = torch.tensor([[0.1, 0.8, 0.1],
+                           [0.7, 0.2, 0.1],
+                           [0.1, 0.1, 0.8]])
+    class_indices = torch.tensor([1,0,2], dtype=torch.long) # long for class types
+    custom_ce = custom_cross_entropy(matrix_bin, class_indices)
+    torch_ce = F.cross_entropy(matrix_bin, class_indices)
+
+    print(f"Custom CE: {custom_ce.item():.6f}")
+    print(f"Torch CE:  {torch_ce:.6f}")
+    print(f"Close: {torch.allclose(custom_ce, torch_ce)}")
+    print()
+
 
 if __name__ == "__main__":
     solve()
