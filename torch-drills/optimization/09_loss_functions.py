@@ -34,12 +34,10 @@ def custom_mse_loss(predictions, targets):
 def custom_binary_cross_entropy(predictions, targets):
     """Binary Cross Entropy Loss (with logits)"""
     # YOUR CODE HERE
-    # Hint: Use torch.clamp to avoid log(0)
     predictions = torch.clamp(predictions, 1e-7, 1-1e-7)
     n = len(predictions)
     sum = 0
     for p,t in zip(predictions,targets):
-
         intermediate1 = t * torch.log(p)
         intermediate2 = (1-t) * torch.log(1-p)
         sum += intermediate1 + intermediate2
