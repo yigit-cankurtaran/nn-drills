@@ -35,7 +35,7 @@ Master training loops, loss functions, and optimization techniques.
 
 | Drill | Name | Completed | Grade | Notes |
 |-------|------|-----------|-------|-------|
-| 09 | `loss_functions.py` | ⭕ Not Started | - | Implement MSE, BCE, CrossEntropy |
+| 09 | `loss_functions.py` | ✅ Completed | A- (90%) | Implement MSE, BCE, CrossEntropy - All functions work correctly, minor style improvements needed |
 | 10 | `gradient_descent.py` | ⭕ Not Started | - | Manual vs automatic differentiation |
 | 11 | `training_loop.py` | ⭕ Not Started | - | Complete training with early stopping |
 
@@ -60,10 +60,10 @@ Complete partially implemented advanced concepts.
 
 ## Progress Summary
 - **Total Drills**: 18
-- **Completed**: 7
+- **Completed**: 8
 - **In Progress**: 0
-- **Not Started**: 11
-- **Overall Progress**: 39%
+- **Not Started**: 10
+- **Overall Progress**: 44%
 
 ## Grading Scale
 - **A+** (95-100%): Excellent implementation, optimal efficiency, great code style
