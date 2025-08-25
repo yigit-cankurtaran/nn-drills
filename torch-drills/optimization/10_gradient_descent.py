@@ -25,7 +25,7 @@ def quadratic_function(x):
 def quadratic_gradient(x):
     """df/dx = 2(x - 3)"""
     # YOUR CODE HERE
-    pass
+    return 2*(x-3)
 
 def manual_gradient_descent(start_x, learning_rate, num_steps):
     """
@@ -38,7 +38,11 @@ def manual_gradient_descent(start_x, learning_rate, num_steps):
     x = start_x
     for step in range(num_steps):
         # YOUR CODE HERE
-        pass
+        x_history.append(x)
+        y = quadratic_function(x)
+        f_history.append(y)
+        grad = quadratic_gradient(x) # don't forget to get the actual gradient!
+        x = x - (learning_rate * grad)        
     
     return x_history, f_history
 
@@ -54,7 +58,12 @@ def torch_gradient_descent(start_x, learning_rate, num_steps):
     
     for step in range(num_steps):
         # YOUR CODE HERE
-        pass
+        x_history.append(x.item())
+        y = (x-3)**2 + 5 # keeping y as a tensor
+        f_history.append(y.item())
+        y.backward()
+        optimizer.step()
+        optimizer.zero_grad()
     
     return x_history, f_history
 
