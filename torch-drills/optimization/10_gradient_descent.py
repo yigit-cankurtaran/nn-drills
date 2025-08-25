@@ -42,7 +42,7 @@ def manual_gradient_descent(start_x, learning_rate, num_steps):
         y = quadratic_function(x)
         f_history.append(y)
         grad = quadratic_gradient(x) # don't forget to get the actual gradient!
-        x = x - (learning_rate * grad)        
+        x = x - (learning_rate * grad)
     
     return x_history, f_history
 
@@ -67,6 +67,12 @@ def torch_gradient_descent(start_x, learning_rate, num_steps):
     
     return x_history, f_history
 
+def adam_gradient_descent(start_x, learning_rate, num_steps):
+    """
+    gonna use adam here
+    """
+    pass
+
 def solve():
     start_x = 0.0
     learning_rate = 0.1
@@ -84,6 +90,8 @@ def solve():
     print(f"Manual GD final f(x): {manual_f_hist[-1]:.6f}")
     print(f"Torch GD final f(x):  {torch_f_hist[-1]:.6f}")
     print(f"Target f(x): 5.0")
+
+    # TODO plot the optimization graphics
 
 if __name__ == "__main__":
     solve()
