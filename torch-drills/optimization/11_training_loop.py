@@ -21,6 +21,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
+import random
 
 class SimpleNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -36,7 +37,20 @@ def create_linear_dataset(n_samples=1000):
     """Create a simple linear regression dataset"""
     # YOUR CODE HERE
     # Generate data following y = 2x + 1 + noise
-    pass
+
+    xs=[]
+    ys=[]
+    
+    for x in range(n_samples):
+        xs.append(x)
+        noise = random.gauss(0, 0.5)
+        y = 2*x + 1 + noise
+        ys.append(y)
+
+    xs = torch.tensor(xs)
+    ys = torch.tensor(ys)
+
+    return xs, ys
 
 def train_epoch(model, train_loader, criterion, optimizer):
     """Train for one epoch"""
