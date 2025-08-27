@@ -28,7 +28,7 @@ Build neural network components from scratch and understand their inner workings
 | 05 | `linear_layer.py` | ✅ Completed | A (93%) | Implement linear layer from scratch - Excellent implementation with proper Xavier initialization |
 | 06 | `activation_functions.py` | ✅ Completed | A+ (96%) | Implement common activation functions - Perfect implementations, all match PyTorch exactly |
 | 07 | `simple_mlp.py` | ✅ Completed | B (83%) | Build MLP for XOR problem - Works but architecture is hard-coded, needs dynamic layer building |
-| 08 | `conv_layer.py` | ⭕ Not Started | - | Understanding convolutional layers |
+| 08 | `conv_layer.py` | ✅ Completed | A- (88%) | Understanding convolutional layers - Good implementation with proper formula, comprehensive testing, and visualization. Clean up debug prints. |
 
 ### ⚡ Optimization (3 drills)
 Master training loops, loss functions, and optimization techniques.
@@ -60,10 +60,10 @@ Complete partially implemented advanced concepts.
 
 ## Progress Summary
 - **Total Drills**: 18
-- **Completed**: 9
+- **Completed**: 10
 - **In Progress**: 0
-- **Not Started**: 9
-- **Overall Progress**: 50%
+- **Not Started**: 8
+- **Overall Progress**: 56%
 
 ## Grading Scale
 - **A+** (95-100%): Excellent implementation, optimal efficiency, great code style
