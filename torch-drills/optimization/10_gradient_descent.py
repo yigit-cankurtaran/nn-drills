@@ -71,25 +71,46 @@ def adam_gradient_descent(start_x, learning_rate, num_steps):
     """
     gonna use adam here
     """
-    pass
+    # brackets bc we want to create a 1D tensor from a scalar
+    x = torch.tensor([start_x], requires_grad=True)
+    # momentums of Adam can be changed through betas, not gonna do it here bc basics
+    optimizer = torch.optim.Adam(params=[x], lr=learning_rate)
+
+    x_history = []
+    f_history = []
+
+    for step in range(num_steps):
+        x_history.append(x.item())
+        y = (x-3)**2 + 5 # keeping y as a tensor
+        f_history.append(y.item())
+        optimizer.zero_grad()
+        y.backward()
+        optimizer.step()
+
+    return x_history, f_history
 
 def solve():
     start_x = 0.0
     learning_rate = 0.1
-    num_steps = 50
+    num_steps = 500
     
     # Manual gradient descent
     manual_x_hist, manual_f_hist = manual_gradient_descent(start_x, learning_rate, num_steps)
     
     # PyTorch gradient descent
     torch_x_hist, torch_f_hist = torch_gradient_descent(start_x, learning_rate, num_steps)
+
+    # adam_gradient_descent
+    adam_x_hist, adam_f_hist = adam_gradient_descent(start_x, learning_rate, num_steps)
     
     print(f"Manual GD final x: {manual_x_hist[-1]:.6f}")
     print(f"Torch GD final x:  {torch_x_hist[-1]:.6f}")
-    print(f"Target x: 3.0")
+    print("Target x: 3.0")
     print(f"Manual GD final f(x): {manual_f_hist[-1]:.6f}")
     print(f"Torch GD final f(x):  {torch_f_hist[-1]:.6f}")
-    print(f"Target f(x): 5.0")
+    print("Target f(x): 5.0")
+    print(f"Adam GD final x:  {adam_x_hist[-1]:.6f}")
+    print(f"Adam GD final f(x):  {adam_f_hist[-1]:.6f}")
 
     # TODO plot the optimization graphics
 
