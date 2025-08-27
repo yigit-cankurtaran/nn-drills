@@ -92,7 +92,7 @@ def adam_gradient_descent(start_x, learning_rate, num_steps):
 def solve():
     start_x = 0.0
     learning_rate = 0.1
-    num_steps = 500
+    num_steps = 50
     
     # Manual gradient descent
     manual_x_hist, manual_f_hist = manual_gradient_descent(start_x, learning_rate, num_steps)
@@ -112,7 +112,22 @@ def solve():
     print(f"Adam GD final x:  {adam_x_hist[-1]:.6f}")
     print(f"Adam GD final f(x):  {adam_f_hist[-1]:.6f}")
 
-    # TODO plot the optimization graphics
+    # plot the optimization graphics
+    plt.figure(figsize=(10,6))
+
+    # trajectories
+    plt.plot(manual_x_hist, manual_f_hist, 'b-', label="Manual GD", linewidth=2)
+    plt.plot(torch_x_hist, torch_f_hist, 'r-', label="torch GD", linewidth=2)
+    plt.plot(adam_x_hist, adam_f_hist, 'g-', label="adam GD", linewidth=2)
+
+    # graph labels and title
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.title("optimization trajectories")
+    plt.legend() # show legend with method names
+    plt.grid(True, alpha=0.3) # light grid
+
+    plt.show()
 
 if __name__ == "__main__":
     solve()
