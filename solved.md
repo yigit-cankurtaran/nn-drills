@@ -36,7 +36,7 @@ Master training loops, loss functions, and optimization techniques.
 | Drill | Name | Completed | Grade | Notes |
 |-------|------|-----------|-------|-------|
 | 09 | `loss_functions.py` | ✅ Completed | A- (90%) | Implement MSE, BCE, CrossEntropy - All functions work correctly, minor style improvements needed |
-| 10 | `gradient_descent.py` | ⭕ Not Started | - | Manual vs automatic differentiation |
+| 10 | `gradient_descent.py` | ✅ Completed | A- (91%) | Manual vs automatic differentiation - Excellent implementation, added bonus Adam optimizer, minor Adam convergence tuning needed |
 | 11 | `training_loop.py` | ⭕ Not Started | - | Complete training with early stopping |
 
 ### 🐛 Debugging (3 drills)
@@ -60,10 +60,10 @@ Complete partially implemented advanced concepts.
 
 ## Progress Summary
 - **Total Drills**: 18
-- **Completed**: 8
+- **Completed**: 9
 - **In Progress**: 0
-- **Not Started**: 10
-- **Overall Progress**: 44%
+- **Not Started**: 9
+- **Overall Progress**: 50%
 
 ## Grading Scale
 - **A+** (95-100%): Excellent implementation, optimal efficiency, great code style
