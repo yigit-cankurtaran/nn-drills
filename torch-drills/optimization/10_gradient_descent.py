@@ -61,9 +61,9 @@ def torch_gradient_descent(start_x, learning_rate, num_steps):
         x_history.append(x.item())
         y = (x-3)**2 + 5 # keeping y as a tensor
         f_history.append(y.item())
+        optimizer.zero_grad()
         y.backward()
         optimizer.step()
-        optimizer.zero_grad()
     
     return x_history, f_history
 
