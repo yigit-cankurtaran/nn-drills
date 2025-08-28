@@ -23,16 +23,6 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import random
 
-def device():
-    dev = torch.device("cpu")
-    if torch.cuda.is_available():
-        dev = torch.device("cuda")
-    elif torch.mps.is_available():
-        dev = torch.device("mps")
-
-    print(f"device is {dev}")
-    return dev
-
 class SimpleNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(SimpleNet, self).__init__()
@@ -49,12 +39,11 @@ class SimpleNet(nn.Module):
         #output, we want regression to output raw vals
         layers.append(nn.Linear(prev_size, output_size))
 
-        self.model = nn.Sequential(*layers).to(device())
+        self.model = nn.Sequential(*layers)
         
     
     def forward(self, x):
         # YOUR CODE HERE
-        x = x.to(device()) # sending input data to device
         return self.model(x)
 
 def create_linear_dataset(n_samples=1000):
@@ -71,9 +60,9 @@ def create_linear_dataset(n_samples=1000):
         y = 2*x + 1 + noise
         ys.append(y)
 
-    # adding dimension to x to make it 2d
+    # adding extra dimension to make them 2d
     xs = torch.tensor(xs, dtype=torch.float32).unsqueeze(1)
-    ys = torch.tensor(ys, dtype=torch.float32) # labels are floats on regression
+    ys = torch.tensor(ys, dtype=torch.float32).unsqueeze(1) # labels are floats on regression
 
     return xs, ys
 
@@ -141,7 +130,22 @@ def solve():
     for epoch in range(num_epochs):
         # YOUR CODE HERE
         # Implement the training loop with early stopping
-        pass
+        tl = train_epoch(model, train_loader, criterion, optimizer)
+        train_losses.append(tl)
+        vl = validate_epoch(model,val_loader,criterion)
+        val_losses.append(vl)
+
+        if epoch % 10 == 0:
+            print(f"train loss: {tl} val loss: {vl}")
+
+        if vl < best_val_loss:
+            best_val_loss = vl
+            patience_counter = 0
+        else:
+            patience_counter += 1
+
+        if patience_counter >= patience:
+            break
     
     print(f"Training completed at epoch {epoch}")
     print(f"Final train loss: {train_losses[-1]:.6f}")
