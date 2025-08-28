@@ -101,7 +101,10 @@ def validate_epoch(model, val_loader, criterion):
     with torch.no_grad():
         for batch_x, batch_y in val_loader:
             # YOUR CODE HERE
-            pass
+            # for validation we only need a forward pass
+            output = model.forward(batch_x)
+            loss = criterion(output, batch_y)
+            total_loss += loss.item()
     
     return total_loss / len(val_loader)
 
