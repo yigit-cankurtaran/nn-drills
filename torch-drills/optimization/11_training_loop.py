@@ -23,15 +23,39 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import random
 
+def device():
+    dev = torch.device("cpu")
+    if torch.cuda.is_available():
+        dev = torch.device("cuda")
+    elif torch.mps.is_available():
+        dev = torch.device("mps")
+
+    print(f"device is {dev}")
+    return dev
+
 class SimpleNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(SimpleNet, self).__init__()
         # YOUR CODE HERE
-        pass
+        layers = []
+        prev_size = input_size
+        hidden_count = 5
+
+        for i in range(hidden_count): # wanna add 5 hidden layers
+            layers.append(nn.Linear(prev_size,hidden_size))
+            layers.append(nn.LeakyReLU()) # better for regression
+            prev_size = hidden_size
+
+        #output, we want regression to output raw vals
+        layers.append(nn.Linear(prev_size, output_size))
+
+        self.model = nn.Sequential(*layers).to(device())
+        
     
     def forward(self, x):
         # YOUR CODE HERE
-        pass
+        self.output = self.model(x)
+        return self.output
 
 def create_linear_dataset(n_samples=1000):
     """Create a simple linear regression dataset"""
