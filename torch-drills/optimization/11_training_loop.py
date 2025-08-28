@@ -54,8 +54,8 @@ class SimpleNet(nn.Module):
     
     def forward(self, x):
         # YOUR CODE HERE
-        self.output = self.model(x)
-        return self.output
+        x = x.to(device()) # sending input data to device
+        return self.model(x)
 
 def create_linear_dataset(n_samples=1000):
     """Create a simple linear regression dataset"""
@@ -66,13 +66,14 @@ def create_linear_dataset(n_samples=1000):
     ys=[]
     
     for x in range(n_samples):
-        xs.append(x)
+        xs.append(float(x)) # samples should be floats
         noise = random.gauss(0, 0.5)
         y = 2*x + 1 + noise
         ys.append(y)
 
-    xs = torch.tensor(xs)
-    ys = torch.tensor(ys)
+    # adding dimension to x to make it 2d
+    xs = torch.tensor(xs, dtype=torch.float32).unsqueeze(1)
+    ys = torch.tensor(ys, dtype=torch.float32) # labels are floats on regression
 
     return xs, ys
 
@@ -83,7 +84,12 @@ def train_epoch(model, train_loader, criterion, optimizer):
     
     for batch_x, batch_y in train_loader:
         # YOUR CODE HERE
-        pass
+        output = model.forward(batch_x)
+        optimizer.zero_grad() # need backward pass even for one epoch
+        loss = criterion(output, batch_y)
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
     
     return total_loss / len(train_loader)
 
