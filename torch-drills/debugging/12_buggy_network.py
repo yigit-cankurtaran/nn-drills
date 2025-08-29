@@ -27,6 +27,7 @@ class BuggyXORNet(nn.Module):
         super(BuggyXORNet, self).__init__()
         self.fc1 = nn.Linear(2, 10)
         self.fc2 = nn.Linear(10, 5)  # BUG: Wrong input size
+        # is it though? it doesn't flow wrong.
         self.fc3 = nn.Linear(5, 1)
     
     def forward(self, x):
@@ -69,6 +70,18 @@ def train_buggy_network():
         print("Final predictions:")
         for i, (input_val, target, pred) in enumerate(zip(X, y, predictions)):
             print(f"Input: {input_val.numpy()}, Target: {target.item():.1f}, Prediction: {pred.item():.4f}")
+
+class CorrectXORNet:
+    # XOR is a simple problem, gonna keep it simple
+    def __init__(self):
+        super(CorrectXORNet, self).__init__()
+        self.fc1 = nn.Linear(2, 10)
+        self.fc2 = nn.Linear(10, 1) # direct to output, no 3rd layer
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = self.fc2(x)
+        return torch.sigmoid(x) # sigmoid for binary output
 
 def solve():
     """
