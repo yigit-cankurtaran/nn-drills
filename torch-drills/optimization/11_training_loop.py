@@ -147,7 +147,7 @@ def solve():
             patience_counter += 1
 
         if patience_counter >= patience:
-            print("no improvement in {patience} runs, breaking")
+            print(f"no improvement in {patience} runs, breaking")
             break
     
     print(f"Training completed at epoch {epoch}")
