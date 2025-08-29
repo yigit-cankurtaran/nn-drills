@@ -71,7 +71,7 @@ def train_buggy_network():
         for i, (input_val, target, pred) in enumerate(zip(X, y, predictions)):
             print(f"Input: {input_val.numpy()}, Target: {target.item():.1f}, Prediction: {pred.item():.4f}")
 
-class CorrectXORNet:
+class CorrectXORNet(nn.Module):
     # XOR is a simple problem, gonna keep it simple
     def __init__(self):
         super(CorrectXORNet, self).__init__()
