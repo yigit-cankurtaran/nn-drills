@@ -83,6 +83,34 @@ class CorrectXORNet(nn.Module):
         x = self.fc2(x)
         return torch.sigmoid(x) # sigmoid for binary output
 
+def train_network():
+    X, y = create_xor_data()
+
+    model = CorrectXORNet()
+    criterion = nn.BCELoss() # binary classification, we need BCE
+    optimizer = optim.Adam(model.parameters(), lr=0.1)
+    epoch_count = 1000
+
+    for epoch in range(epoch_count):
+        # forward pass
+        output = model(X)
+        train_loss = criterion(output, y)
+
+        #backward pass
+        optimizer.zero_grad()
+        train_loss.backward()
+        optimizer.step()
+
+        if epoch % 100 == 0:
+            print(f'Epoch {epoch}, Loss: {train_loss.item():.4f}')
+
+    # validation after training
+    with torch.no_grad():
+        pred = model(X)
+        pred_binary = (pred > 0.5).float()
+        val_acc = (pred_binary == y).float().mean().item()
+        print(f"validation accuracy: {val_acc}")
+
 def solve():
     """
     YOUR TASK: Fix all the bugs in the code above and make it work properly.
@@ -98,7 +126,10 @@ def solve():
     print("Now fix the bugs and implement the corrected version below:")
     
     # YOUR FIXED CODE HERE
-    pass
+    try:
+        train_network()
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     solve()
