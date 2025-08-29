@@ -126,6 +126,7 @@ def solve():
     
     train_losses = []
     val_losses = []
+    epochs = []
     
     for epoch in range(num_epochs):
         # YOUR CODE HERE
@@ -134,6 +135,7 @@ def solve():
         train_losses.append(tl)
         vl = validate_epoch(model,val_loader,criterion)
         val_losses.append(vl)
+        epochs.append(epoch)
 
         if epoch % 10 == 0:
             print(f"train loss: {tl} val loss: {vl}")
@@ -145,11 +147,24 @@ def solve():
             patience_counter += 1
 
         if patience_counter >= patience:
+            print("no improvement in {patience} runs, breaking")
             break
     
     print(f"Training completed at epoch {epoch}")
     print(f"Final train loss: {train_losses[-1]:.6f}")
     print(f"Final val loss: {val_losses[-1]:.6f}")
+
+    # visualization
+    plt.figure(figsize=(10,6))
+    plt.plot(epochs, train_losses, "b-", label="Training Loss per Epoch", linewidth=2)
+    plt.plot(epochs, val_losses, "r-", label="Validation Loss per Epoch", linewidth=2)
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title("Training vs Validation Loss")
+    plt.legend()
+    plt.grid(True, alpha=0.5)
+
+    plt.show()
 
 if __name__ == "__main__":
     solve()
