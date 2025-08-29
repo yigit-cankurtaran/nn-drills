@@ -44,7 +44,7 @@ Fix broken code and learn common PyTorch pitfalls.
 
 | Drill | Name | Completed | Grade | Notes |
 |-------|------|-----------|-------|-------|
-| 12 | `buggy_network.py` | ⭕ Not Started | - | Fix 5+ bugs in XOR network |
+| 12 | `buggy_network.py` | ✅ Completed | A- (88%) | Fix 5+ bugs in XOR network - Excellent debugging skills, identified all bugs correctly and provided clean fixed implementation with proper BCE loss, sigmoid activation, and Adam optimizer. Clean code with good comments. |
 | 13 | `gradient_issues.py` | ⭕ Not Started | - | Resolve gradient-related problems |
 | 14 | `memory_leaks.py` | ⭕ Not Started | - | Fix memory and efficiency issues |
 
@@ -60,10 +60,10 @@ Complete partially implemented advanced concepts.
 
 ## Progress Summary
 - **Total Drills**: 18
-- **Completed**: 11
+- **Completed**: 12
 - **In Progress**: 0
-- **Not Started**: 7
-- **Overall Progress**: 61%
+- **Not Started**: 6
+- **Overall Progress**: 67%
 
 ## Grading Scale
 - **A+** (95-100%): Excellent implementation, optimal efficiency, great code style
