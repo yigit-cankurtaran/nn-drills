@@ -23,7 +23,7 @@ class ProblematicNet(nn.Module):
     def __init__(self):
         super(ProblematicNet, self).__init__()
         # BUG: Poor weight initialization leading to vanishing gradients
-        self.layers = nn.ModuleList([
+        self.layers = nn.ModuleList([ # shapes look reasonable
             nn.Linear(10, 100),
             nn.Linear(100, 100),
             nn.Linear(100, 100),
@@ -34,14 +34,15 @@ class ProblematicNet(nn.Module):
         # BUG: Initialize weights poorly
         for layer in self.layers:
             layer.weight.data.fill_(0.01)  # Very small weights
+            # we can fix this through xavier initialization
     
     def forward(self, x):
         for i, layer in enumerate(self.layers[:-1]):
             x = layer(x)
             # BUG: Using sigmoid everywhere causes vanishing gradients
             x = torch.sigmoid(x)
-            # BUG: In-place operation that might break gradients
-            x *= 0.1
+            # scaling down activation too much, creates vanishing activations and gradients
+            x *= 0.1 # completely breaks training loop
         
         x = self.layers[-1](x)
         return x
@@ -63,11 +64,13 @@ def problematic_training():
         # BUG: Not clearing gradients properly
         if epoch % 2 == 0:  # Only clear gradients every other epoch
             optimizer.zero_grad()
+        # gonna need to do this before every backward pass
         
         loss.backward()
         
         # BUG: Gradient clipping applied incorrectly
-        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.001)  # Too small
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.001)
+        # needs larger max_norm, might make it 0.5 myself
         
         optimizer.step()
         
