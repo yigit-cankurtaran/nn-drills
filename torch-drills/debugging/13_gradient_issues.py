@@ -85,7 +85,7 @@ def problematic_training():
 class GoodNet(nn.Module):
     def __init__(self):
         super(GoodNet,self).__init__()
-        layers = [
+        self.model= nn.Sequential(
             nn.Linear(10, 100),
             nn.ReLU(), # ReLU activation in between layers
             nn.Linear(100, 100),
@@ -96,9 +96,8 @@ class GoodNet(nn.Module):
             nn.ReLU(),
             nn.Linear(100, 1),
             nn.Sigmoid() # sigmoid only at the end
-            ]
+            )
 
-        self.model= nn.Sequential(*layers)
         print(f"model:\n{self.model}\n")
 
         # xavier uniform
