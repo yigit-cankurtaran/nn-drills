@@ -82,6 +82,34 @@ def problematic_training():
                     total_grad_norm += param.grad.norm().item()
             print(f'Epoch {epoch}, Loss: {loss.item():.6f}, Grad Norm: {total_grad_norm:.6f}')
 
+class GoodNet(nn.Module):
+    def __init__(self):
+        super(GoodNet,self).__init__()
+        layers = [
+            nn.Linear(10, 100),
+            nn.ReLU(), # ReLU activation in between layers
+            nn.Linear(100, 100),
+            nn.ReLU(),
+            nn.Linear(100, 100),
+            nn.ReLU(),
+            nn.Linear(100, 100),
+            nn.ReLU(),
+            nn.Linear(100, 1),
+            nn.Sigmoid() # sigmoid only at the end
+            ]
+
+        self.model= nn.Sequential(*layers)
+        print(f"model:\n{self.model}\n")
+
+        # xavier uniform
+        for module in self.model:
+            if isinstance(module, nn.Linear):
+                nn.init.xavier_uniform_(module.weight)
+                # we can only initialize weights for these layers and not activations
+
+    def forward(self, X):
+        return self.model(X)
+        
 def solve():
     """
     YOUR TASK: 
@@ -91,13 +119,13 @@ def solve():
     """
     
     print("Running problematic network:")
-    problematic_training()
+    # problematic_training()
     
     print("\n" + "="*50)
     print("Now implement your fixes:")
     
     # YOUR FIXED CODE HERE
-    pass
+    model = GoodNet()
 
 if __name__ == "__main__":
     solve()
