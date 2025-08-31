@@ -104,7 +104,6 @@ class GoodNet(nn.Module):
         for module in self.model:
             if isinstance(module, nn.Linear):
                 nn.init.xavier_uniform_(module.weight)
-                # we can only initialize weights for these layers and not activations
                 if module.bias is not None:
                     nn.init.zeros_(module.bias)
 
