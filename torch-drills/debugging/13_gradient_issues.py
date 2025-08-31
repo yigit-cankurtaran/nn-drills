@@ -96,6 +96,7 @@ class GoodNet(nn.Module):
             nn.ReLU(),
             nn.Linear(100, 1)
             # deleted sigmoid because it's a regression problem
+            # regression problems need linear output
             )
 
         print(f"model:\n{self.model}\n")
