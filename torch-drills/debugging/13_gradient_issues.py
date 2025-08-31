@@ -94,8 +94,8 @@ class GoodNet(nn.Module):
             nn.ReLU(),
             nn.Linear(100, 100),
             nn.ReLU(),
-            nn.Linear(100, 1),
-            nn.Sigmoid() # sigmoid only at the end
+            nn.Linear(100, 1)
+            # deleted sigmoid because it's a regression problem
             )
 
         print(f"model:\n{self.model}\n")
@@ -109,6 +109,30 @@ class GoodNet(nn.Module):
 
     def forward(self, X):
         return self.model(X)
+
+def good_training():
+    X = torch.randn(100, 10, requires_grad=True) # torch will track gradients
+    y = torch.randn(100, 1) # labels
+
+    model = GoodNet()
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+    for epoch in range(100):
+        outputs = model(X)
+        loss = criterion(outputs, y)
+        
+        optimizer.zero_grad()
+        loss.backward()
+        nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.5)
+        optimizer.step()
+        
+        if epoch % 10 == 0:
+            total_grad_norm = 0
+            for param in model.parameters():
+                if param.grad is not None:
+                    total_grad_norm += param.grad.norm().item()
+            print(f'Epoch {epoch}, Loss: {loss.item():.6f}, Grad Norm: {total_grad_norm:.6f}')
         
 def solve():
     """
@@ -125,7 +149,8 @@ def solve():
     print("Now implement your fixes:")
     
     # YOUR FIXED CODE HERE
-    model = GoodNet()
+    print("good training:")
+    good_training()
 
 if __name__ == "__main__":
     solve()
