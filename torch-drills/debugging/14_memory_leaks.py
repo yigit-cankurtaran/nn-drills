@@ -139,6 +139,17 @@ class NeuralNet(nn.Module):
     def forward(self,x):
         return self.layers(x)
 
+# using type hints here
+def inference(model, data):
+    model.eval()
+    results = []
+
+    with torch.no_grad():
+        for batch in data: # iterating through every batch
+            results.append(model(data))
+
+    return results
+
 def solve():
     """
     YOUR TASK:
