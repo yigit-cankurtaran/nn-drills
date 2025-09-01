@@ -148,7 +148,7 @@ class NeuralNet(nn.Module):
         self.to(self.device)
 
     def forward(self,x):
-        x = x.to(device())
+        # x = x.to(device()) # data already on the correct device when we pass it
         return self.layers(x)
 
 # using type hints here
