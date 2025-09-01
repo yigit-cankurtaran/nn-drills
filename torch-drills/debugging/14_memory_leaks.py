@@ -30,6 +30,7 @@ class MemoryHungryNet(nn.Module):
     
     def forward(self, x):
         # BUG: Unnecessary intermediate tensor storage
+        # no idea what is going on here lol
         intermediate_results = []
         
         x = torch.relu(self.fc1(x))
@@ -113,9 +114,30 @@ def problematic_training_loop():
     
     # BUG: Memory-intensive inference
     print("Running inference...")
-    test_data = [torch.randn(32, 1000) for _ in range(10)]
+    test_data = [torch.randn(32, 1000) for _ in range(10)] # test data is here, regression
+    # 32 samples, 1000 features each, batch size 32 input size 1000 output size 1
     results = problematic_inference(model, test_data)
     print(f"Inference completed, {len(results)} results")
+
+class NeuralNet(nn.Module):
+    def __init__(self,input_size=1000,output_size=1):
+        # 1000 features and i want single value regression
+        # batch sizes are handled by pytorch
+        super(NeuralNet,self).__init__()
+        self.layers = nn.Sequential( # 5 layers, learns patterns but not too deep
+            nn.Linear(input_size, 512),
+            nn.ReLU(),
+            nn.Linear(512, 256),
+            nn.ReLU(),
+            nn.Linear(256,128),
+            nn.ReLU(),
+            nn.Linear(128,64),
+            nn.ReLU(),
+            nn.Linear(64,output_size) # linear on the output bc regression
+        )
+
+    def forward(self,x):
+        return self.layers(x)
 
 def solve():
     """
