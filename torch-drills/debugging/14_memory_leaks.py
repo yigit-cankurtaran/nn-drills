@@ -177,6 +177,8 @@ def training_loop():
     criterion = nn.MSELoss()
     train_count = 10
 
+    start_time = time.time()
+
     for epoch in range(train_count):
         model.train()
         epochloss = 0.
@@ -198,6 +200,9 @@ def training_loop():
 
         avg_loss = epochloss / len(loader)
         print(f"epoch:{epoch},loss:{avg_loss}")
+
+    print(f"took {time.time() - start_time} seconds")
+    # ours takes longer but actually works and delivers great results
 
 def solve():
     """
