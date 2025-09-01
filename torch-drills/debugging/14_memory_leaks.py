@@ -182,12 +182,16 @@ def training_loop():
         epochloss = 0.
 
         for batch_X, batch_y in loader:
+            # moving batch data to device
+            batch_X = batch_X.to(device())
+            batch_y = batch_y.to(device())
+                        
             optimizer.zero_grad()
 
             output = model(batch_X)
             loss = criterion(output, batch_y)
 
-            epoch.loss += loss.item() # we don't want the whole tensor
+            epochloss += loss.item() # we don't want the whole tensor
 
             loss.backward()
             optimizer.step()
