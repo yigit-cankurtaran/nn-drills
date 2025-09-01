@@ -119,11 +119,20 @@ def problematic_training_loop():
     results = problematic_inference(model, test_data)
     print(f"Inference completed, {len(results)} results")
 
+def device():
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    elif torch.mps.is_available():
+        return torch.device("cuda")
+    else:
+        return torch.device("cpu")
+
 class NeuralNet(nn.Module):
     def __init__(self,input_size=1000,output_size=1):
         # 1000 features and i want single value regression
         # batch sizes are handled by pytorch
         super(NeuralNet,self).__init__()
+        self.device = device()
         self.layers = nn.Sequential( # 5 layers, learns patterns but not too deep
             nn.Linear(input_size, 512),
             nn.ReLU(),
@@ -135,8 +144,10 @@ class NeuralNet(nn.Module):
             nn.ReLU(),
             nn.Linear(64,output_size) # linear on the output bc regression
         )
+        self.to(self.device)
 
     def forward(self,x):
+        x = x.to(device())
         return self.layers(x)
 
 # using type hints here
@@ -146,9 +157,15 @@ def inference(model, data):
 
     with torch.no_grad():
         for batch in data: # iterating through every batch
-            results.append(model(data))
+            results.append(model(batch))
 
     return results
+
+def training_loop():
+    model = NeuralNet() # keeping defaults
+    model = model.to(device())
+        
+    
 
 def solve():
     """
