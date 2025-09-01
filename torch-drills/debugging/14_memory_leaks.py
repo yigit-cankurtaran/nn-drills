@@ -19,6 +19,7 @@ EXPECTED OUTPUT:
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.utils.data import DataLoader, TensorDataset
 import time
 
 class MemoryHungryNet(nn.Module):
@@ -162,10 +163,37 @@ def inference(model, data):
     return results
 
 def training_loop():
+    # create dataset first
+    X_train = torch.randn(1280, 1000) # 1280 bc batch size and whatnot
+    y_train = torch.randn(1280, 1)
+
+    # dataloader for model
+    dataset = TensorDataset(X_train, y_train)
+    loader = DataLoader(dataset, batch_size=64, shuffle=True)
+
     model = NeuralNet() # keeping defaults
     model = model.to(device())
-        
-    
+    optimizer = optim.Adam(model.parameters())
+    criterion = nn.MSELoss()
+    train_count = 10
+
+    for epoch in range(train_count):
+        model.train()
+        epochloss = 0.
+
+        for batch_X, batch_y in loader:
+            optimizer.zero_grad()
+
+            output = model(batch_X)
+            loss = criterion(output, batch_y)
+
+            epoch.loss += loss.item() # we don't want the whole tensor
+
+            loss.backward()
+            optimizer.step()
+
+        avg_loss = epochloss / len(loader)
+        print(f"epoch:{epoch},loss:{avg_loss}")
 
 def solve():
     """
@@ -183,7 +211,7 @@ def solve():
     print("Now implement your memory-efficient fixes:")
     
     # YOUR FIXED CODE HERE
-    pass
+    training_loop()
 
 if __name__ == "__main__":
     solve()
