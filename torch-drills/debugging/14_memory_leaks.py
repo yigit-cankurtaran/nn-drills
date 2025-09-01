@@ -164,8 +164,8 @@ def inference(model, data):
 
 def training_loop():
     # create dataset first
-    X_train = torch.randn(1280, 1000) # 1280 bc batch size and whatnot
-    y_train = torch.randn(1280, 1)
+    X_train = torch.randn(1280, 1000, device=device()) # 1280 bc batch size and whatnot
+    y_train = torch.randn(1280, 1, device=device())
 
     # dataloader for model
     dataset = TensorDataset(X_train, y_train)
@@ -184,10 +184,6 @@ def training_loop():
         epochloss = 0.
 
         for batch_X, batch_y in loader:
-            # moving batch data to device
-            batch_X = batch_X.to(device())
-            batch_y = batch_y.to(device())
-                        
             optimizer.zero_grad()
 
             output = model(batch_X)
@@ -203,6 +199,7 @@ def training_loop():
 
     print(f"took {time.time() - start_time} seconds")
     # ours takes longer but actually works and delivers great results
+    # due to device movement, we create data on CPU and move it to GPU twice
 
 def solve():
     """
