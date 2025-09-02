@@ -169,7 +169,10 @@ def training_loop():
 
     # dataloader for model
     dataset = TensorDataset(X_train, y_train)
-    loader = DataLoader(dataset, batch_size=64, shuffle=True)
+    loader = DataLoader(dataset, batch_size=16, shuffle=True)
+    # raising the batch size gave more loss but faster training
+    # faster training = no data operation overhead
+    # more loss = small dataset+big batch not being representative of distribution
 
     model = NeuralNet() # keeping defaults
     model = model.to(device())
