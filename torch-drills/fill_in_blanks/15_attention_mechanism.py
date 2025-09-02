@@ -34,7 +34,9 @@ class SimpleAttention(nn.Module):
         batch_size, seq_len, hidden_size = keys.size()
         
         # FILL IN: Expand query to match keys dimensions
-        query_expanded = query.unsqueeze(1).expand(_____, _____, _____)
+        query_expanded = query.unsqueeze(1).expand(-1, seq_len, -1)
+        # -1 = don't change this dimension's size
+        # we only need to add a new dimension(unsqueeze) and then expand it to seq_len
         
         # FILL IN: Compute attention scores using dot product
         scores = torch.sum(query_expanded * keys, dim=_____)
