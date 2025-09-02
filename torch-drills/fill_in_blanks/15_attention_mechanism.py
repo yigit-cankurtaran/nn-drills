@@ -19,7 +19,7 @@ class SimpleAttention(nn.Module):
         super(SimpleAttention, self).__init__()
         self.hidden_size = hidden_size
         # FILL IN: Create linear layer for computing attention scores
-        self.attention = _______________
+        self.attention = nn.Linear(hidden_size, 1)
     
     def forward(self, query, keys, values):
         """
