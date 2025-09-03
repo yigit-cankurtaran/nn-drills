@@ -21,12 +21,14 @@ class CustomBatchNorm1d(nn.Module):
         self.momentum = momentum
         
         # FILL IN: Create learnable parameters gamma and beta
-        self.gamma = nn.Parameter(torch.ones(_____))
-        self.beta = nn.Parameter(torch.zeros(_____))
+        # look up how this all works
+        self.gamma = nn.Parameter(torch.ones(num_features))
+        self.beta = nn.Parameter(torch.zeros(num_features))
         
         # FILL IN: Create running statistics (not trainable)
-        self.register_buffer('running_mean', torch.zeros(_____))
-        self.register_buffer('running_var', torch.ones(_____))
+        self.register_buffer('running_mean', torch.zeros(num_features))
+        # register_buffer is used for stuff that is not a parameter but part of state
+        self.register_buffer('running_var', torch.ones(num_features))
     
     def forward(self, x):
         """
