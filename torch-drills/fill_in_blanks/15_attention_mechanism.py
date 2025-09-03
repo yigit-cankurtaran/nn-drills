@@ -39,14 +39,13 @@ class SimpleAttention(nn.Module):
         # we only need to add a new dimension(unsqueeze) and then expand it to seq_len
         
         # FILL IN: Compute attention scores using dot product
-        scores = torch.sum(query_expanded * keys, dim=_____)
+        scores = torch.sum(query_expanded * keys, dim=2) # sum along the hidden_size dimension
         
         # FILL IN: Apply softmax to get attention weights
-        attention_weights = F.softmax(_____, dim=_____)
+        attention_weights = F.softmax(scores, dim=1) # normalize across seq_len dimension
         
         # FILL IN: Compute context vector as weighted sum of values
-        context = torch.sum(attention_weights.unsqueeze(2) * _____, dim=_____)
-        
+        context = torch.sum(attention_weights.unsqueeze(2) * values, dim=1) # sum along seq_len        
         return context, attention_weights
 
 def solve():
