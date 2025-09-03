@@ -58,7 +58,7 @@ def solve():
     values = torch.randn(batch_size, seq_len, hidden_size)
     
     # FILL IN: Create attention module
-    attention = SimpleAttention(_____)
+    attention = SimpleAttention(hidden_size) # the init method takes only hidden_size
     
     # Forward pass
     context, weights = attention(query, keys, values)
@@ -70,7 +70,7 @@ def solve():
     print("Attention weights shape:", weights.shape)
     
     # FILL IN: Check that attention weights sum to 1
-    weights_sum = torch.sum(weights, dim=_____)
+    weights_sum = torch.sum(weights, dim=1)
     print("Attention weights sum:", weights_sum)
     print("Weights sum to 1:", torch.allclose(weights_sum, torch.ones_like(weights_sum)))
 
