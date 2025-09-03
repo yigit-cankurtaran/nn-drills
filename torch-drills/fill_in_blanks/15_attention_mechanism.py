@@ -40,12 +40,18 @@ class SimpleAttention(nn.Module):
         
         # FILL IN: Compute attention scores using dot product
         scores = torch.sum(query_expanded * keys, dim=2) # sum along the hidden_size dimension
+        # this is just basic dot product. we're doing it this way to not transpose keys
+        # summing this multiplication along hidden_size is just the normal dot product
         
         # FILL IN: Apply softmax to get attention weights
         attention_weights = F.softmax(scores, dim=1) # normalize across seq_len dimension
+        # we're normalizing across sequence length because we're trying to distribute attention.
         
         # FILL IN: Compute context vector as weighted sum of values
-        context = torch.sum(attention_weights.unsqueeze(2) * values, dim=1) # sum along seq_len        
+        context = torch.sum(attention_weights.unsqueeze(2) * values, dim=1) # sum along seq_len
+        # combining all sequence positions into one summary
+        # summing along sequence length because we want to collapse the sequence dimension
+
         return context, attention_weights
 
 def solve():
