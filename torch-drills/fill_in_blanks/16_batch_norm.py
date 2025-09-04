@@ -39,8 +39,8 @@ class CustomBatchNorm1d(nn.Module):
         """
         if self.training:
             # FILL IN: Compute batch statistics
-            batch_mean = torch.mean(x, dim=_____)
-            batch_var = torch.var(x, dim=_____, unbiased=False)
+            batch_mean = torch.mean(x, dim=0) # for batch statistics, we compute across batch
+            batch_var = torch.var(x, dim=0, unbiased=False)
             
             # FILL IN: Update running statistics
             self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * _____
