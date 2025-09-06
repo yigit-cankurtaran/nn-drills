@@ -43,8 +43,9 @@ class CustomBatchNorm1d(nn.Module):
             batch_var = torch.var(x, dim=0, unbiased=False)
             
             # FILL IN: Update running statistics
-            self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * _____
-            self.running_var = (1 - self.momentum) * self.running_var + self.momentum * _____
+            # exponential moving average update formula
+            self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * batch_mean
+            self.running_var = (1 - self.momentum) * self.running_var + self.momentum * batch_var
             
             # Use batch statistics for normalization
             mean = batch_mean
