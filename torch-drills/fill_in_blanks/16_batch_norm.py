@@ -52,14 +52,14 @@ class CustomBatchNorm1d(nn.Module):
             var = batch_var
         else:
             # FILL IN: Use running statistics during inference
-            mean = _____
-            var = _____
+            mean = self.running_mean
+            var = self.running_var
         
         # FILL IN: Normalize the input
-        x_normalized = (x - mean) / torch.sqrt(var + _____)
+        x_normalized = (x - mean) / torch.sqrt(var + self.eps) # epsilon
         
         # FILL IN: Apply learnable transformation
-        output = _____ * x_normalized + _____
+        output = self.gamma * x_normalized + self.beta
         
         return output
 
@@ -75,10 +75,10 @@ def solve():
     print(f"Std: {x.std(dim=0)}")
     
     # FILL IN: Create custom batch norm layer
-    custom_bn = CustomBatchNorm1d(_____)
+    custom_bn = CustomBatchNorm1d(num_features) #the rest are defaults
     
     # FILL IN: Create PyTorch's batch norm for comparison
-    torch_bn = nn.BatchNorm1d(_____)
+    torch_bn = nn.BatchNorm1d(num_features) #the rest are defaults again
     
     # Copy parameters to make fair comparison
     with torch.no_grad():
