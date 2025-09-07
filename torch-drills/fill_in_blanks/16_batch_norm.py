@@ -40,16 +40,17 @@ class CustomBatchNorm1d(nn.Module):
         if self.training:
             # FILL IN: Compute batch statistics
             batch_mean = torch.mean(x, dim=0) # for batch statistics, we compute across batch
-            batch_var = torch.var(x, dim=0, unbiased=False)
+            batch_var_biased = torch.var(x, dim=0, unbiased=False)  # for normalization
+            batch_var_unbiased = torch.var(x, dim=0, unbiased=True)  # for running stats
             
             # FILL IN: Update running statistics
             # exponential moving average update formula
             self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * batch_mean
-            self.running_var = (1 - self.momentum) * self.running_var + self.momentum * batch_var
+            self.running_var = (1 - self.momentum) * self.running_var + self.momentum * batch_var_unbiased
             
             # Use batch statistics for normalization
             mean = batch_mean
-            var = batch_var
+            var = batch_var_biased
         else:
             # FILL IN: Use running statistics during inference
             mean = self.running_mean
