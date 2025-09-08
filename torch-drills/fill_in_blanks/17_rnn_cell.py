@@ -34,7 +34,7 @@ class CustomRNNCell(nn.Module):
         """
         # FILL IN: Compute new hidden state
         # Formula: h_new = tanh(W_ih @ input + W_hh @ hidden)
-        new_hidden = torch.tanh(_____ + _____)
+        new_hidden = torch.tanh(self.W_ih(input) + self.W_hh(hidden))
         
         return new_hidden
 
@@ -45,7 +45,7 @@ class SimpleRNN(nn.Module):
         self.num_layers = num_layers
         
         # FILL IN: Create RNN cell
-        self.rnn_cell = CustomRNNCell(_____, _____)
+        self.rnn_cell = CustomRNNCell(input_size, hidden_size)
     
     def forward(self, input, hidden=None):
         """
@@ -70,13 +70,13 @@ class SimpleRNN(nn.Module):
             input_t = input[:, t, :]
             
             # Update hidden state
-            hidden = self.rnn_cell(_____, _____)
+            hidden = self.rnn_cell(input_t, hidden)
             
             # Store output
             outputs.append(hidden)
         
         # FILL IN: Stack outputs along time dimension
-        output = torch.stack(_____, dim=_____)
+        output = torch.stack(outputs, dim=1) # stack expects list, not unpacked list
         
         return output, hidden
 
