@@ -113,7 +113,7 @@ def solve():
     
     # FILL IN: Verify that the last output equals the final hidden state
     last_output = custom_output[:, -1, :]
-    final_hidden =  custom_hidden2
+    final_hidden =  custom_hidden
     print(f"last output shape is {last_output.shape}")
     print("Last output equals final hidden:", torch.allclose(last_output, final_hidden))
 
