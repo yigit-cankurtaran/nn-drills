@@ -21,8 +21,8 @@ class CustomRNNCell(nn.Module):
         self.hidden_size = hidden_size
         
         # FILL IN: Create weight matrices for input-to-hidden and hidden-to-hidden connections
-        self.W_ih = nn.Linear(_____, _____)  # input to hidden
-        self.W_hh = nn.Linear(_____, _____)  # hidden to hidden
+        self.W_ih = nn.Linear(input_size, hidden_size)  # input to hidden
+        self.W_hh = nn.Linear(hidden_size, hidden_size)  # hidden to hidden
     
     def forward(self, input, hidden):
         """
