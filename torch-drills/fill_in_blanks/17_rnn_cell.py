@@ -90,10 +90,10 @@ def solve():
     print("Input shape:", x.shape)
     
     # FILL IN: Create custom RNN
-    custom_rnn = SimpleRNN(_____, _____)
+    custom_rnn = SimpleRNN(input_size, hidden_size)
     
     # FILL IN: Create PyTorch's RNN for comparison
-    torch_rnn = nn.RNN(_____, _____, batch_first=True)
+    torch_rnn = nn.RNN(input_size, hidden_size, batch_first=True)
     
     # Forward pass
     custom_output, custom_hidden = custom_rnn(x)
@@ -113,7 +113,9 @@ def solve():
     
     # FILL IN: Verify that the last output equals the final hidden state
     last_output = custom_output[:, -1, :]
-    print("Last output equals final hidden:", torch.allclose(last_output, _____))
+    final_hidden =  custom_hidden2
+    print(f"last output shape is {last_output.shape}")
+    print("Last output equals final hidden:", torch.allclose(last_output, final_hidden))
 
 if __name__ == "__main__":
     solve()
