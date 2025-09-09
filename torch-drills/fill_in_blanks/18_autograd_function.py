@@ -25,10 +25,10 @@ class SquareFunction(Function):
             output: input^2
         """
         # FILL IN: Store input for backward pass
-        ctx.save_for_backward(_____)
+        ctx.save_for_backward(input)
         
         # FILL IN: Compute and return input squared
-        return _____
+        return input**2
     
     @staticmethod
     def backward(ctx, grad_output):
@@ -44,7 +44,7 @@ class SquareFunction(Function):
         input, = ctx.saved_tensors
         
         # FILL IN: Compute gradient: d/dx(x^2) = 2x
-        grad_input = grad_output * _____
+        grad_input = grad_output * 2 * input # 2x = 2*input
         
         return grad_input
 
@@ -59,11 +59,11 @@ def solve():
     print("Input:", x)
     
     # FILL IN: Apply custom square function
-    y = square(_____)
+    y = square(x)
     print("Output (y = x^2):", y)
     
     # FILL IN: Compute loss (sum of squares for simplicity)
-    loss = torch.sum(_____)
+    loss = torch.sum(y)
     print("Loss (sum of y):", loss)
     
     # Backward pass
@@ -77,7 +77,7 @@ def solve():
     print("Expected gradients:", expected_grad)
     
     # FILL IN: Check if gradients are correct
-    print("Gradients correct:", torch.allclose(x.grad, _____))
+    print("Gradients correct:", torch.allclose(x.grad, expected_grad))
     
     # Test with PyTorch's built-in square for comparison
     x2 = torch.tensor([1.0, 2.0, 3.0, 4.0], requires_grad=True)
@@ -93,7 +93,7 @@ def solve():
     X = torch.randn(3, 4, requires_grad=True)
     
     # FILL IN: Apply custom square to matrix
-    Y = _____
+    Y = square(X)
     matrix_loss = torch.sum(Y)
     matrix_loss.backward()
     
